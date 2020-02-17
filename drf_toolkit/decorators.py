@@ -1,5 +1,6 @@
 from power_dict.schema_validator import SchemaValidator
-from django.utils.six import wraps
+from six import wraps
+
 from drf_toolkit.drf_utils import DrfUtils
 
 

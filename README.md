@@ -6,3 +6,4 @@
 1. Django rest framework toolkit
 1. REST views decorators
 1. Base REST views
+1. Attention! Requires django 3 and higher
