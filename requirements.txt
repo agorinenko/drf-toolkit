@@ -3,3 +3,5 @@ power-dict
 djangorestframework
 pytest==5.3.1
 django>=3.0
+wheel
+twine

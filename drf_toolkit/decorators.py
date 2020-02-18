@@ -12,7 +12,7 @@ def validate_request(schema):
             context = DrfUtils.get_request_parameters(request)
             context = SchemaValidator.validate(context, schema)
             kwargs['context'] = context
-            return view_func(request, *args, **kwargs)
+            return view_func(request._request, *args, **kwargs)
 
         return _wrapped_view
 
