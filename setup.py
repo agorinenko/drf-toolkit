@@ -21,8 +21,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 2.2.10'
-        'Framework :: DjangoRestFramework'
+        'Framework :: Django :: 2.2'
     ],
     install_requires=[
         'try-parse',
