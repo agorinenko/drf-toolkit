@@ -37,7 +37,7 @@ class DrfUtils:
                 status = 500
 
         return Response({
-            'error': error_message
+            'detail': error_message
         }, status=status)
 
     @staticmethod
