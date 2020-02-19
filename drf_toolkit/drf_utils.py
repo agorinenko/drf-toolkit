@@ -5,6 +5,8 @@ from power_dict.utils import DictUtils
 from rest_framework.exceptions import ParseError, NotAuthenticated
 from rest_framework.response import Response
 
+from drf_toolkit.errors import ApiViewError
+
 
 class DrfUtils:
     @staticmethod
@@ -25,6 +27,10 @@ class DrfUtils:
                 InvalidSchemeError
             ]:
                 status = 400
+            elif exception_type in [
+                ApiViewError
+            ]:
+                status = exception.status
             elif exception_type in [
                 NotAuthenticated
             ]:
