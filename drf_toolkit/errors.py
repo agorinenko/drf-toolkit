@@ -11,3 +11,8 @@ class ApiViewError(Exception):
     def status(self):
         return self.__status
 
+
+class DjangoModelError(Exception):
+    """
+    Django model error
+    """

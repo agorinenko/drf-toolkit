@@ -5,7 +5,7 @@ from power_dict.utils import DictUtils
 from rest_framework.exceptions import ParseError, NotAuthenticated
 from rest_framework.response import Response
 
-from drf_toolkit.errors import ApiViewError
+from drf_toolkit.errors import ApiViewError, DjangoModelError
 
 
 class DrfUtils:
@@ -24,7 +24,8 @@ class DrfUtils:
                 InvalidParameterError,
                 NoneParameterError,
                 ParseError,
-                InvalidSchemeError
+                InvalidSchemeError,
+                DjangoModelError
             ]:
                 status = 400
             elif exception_type in [
