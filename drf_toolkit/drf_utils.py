@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib.auth.models import AnonymousUser
 from django.http import Http404
 from power_dict.errors import NoneParameterError, InvalidParameterError, InvalidSchemeError
@@ -42,6 +44,14 @@ class DrfUtils:
                 status = 404
             else:
                 status = 500
+
+        logger = logging.getLogger('drf_toolkit')
+
+        if logger is not None:
+            if exception is not None:
+                logger.exception(exception)
+            else:
+                logger.exception(error_message)
 
         return Response({
             'detail': error_message
