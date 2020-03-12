@@ -2,7 +2,7 @@ import logging
 
 from django.contrib.auth.models import AnonymousUser
 from django.http import Http404
-from power_dict.errors import NoneParameterError, InvalidParameterError, InvalidSchemeError
+from power_dict.errors import NoneParameterError, InvalidParameterError, InvalidSchemeError, NotAllowedParameterError
 from power_dict.utils import DictUtils
 from rest_framework.exceptions import ParseError, NotAuthenticated
 from rest_framework.response import Response
@@ -27,7 +27,8 @@ class DrfUtils:
                 NoneParameterError,
                 ParseError,
                 InvalidSchemeError,
-                DjangoModelError
+                DjangoModelError,
+                NotAllowedParameterError
             ]:
                 status = 400
             elif exception_type in [
@@ -112,6 +113,16 @@ class DrfUtils:
     def get_required_bool_request_parameter(request, name) -> bool:
         qp = DrfUtils.get_request_parameters(request)
         return DictUtils.get_required_bool_dict_property(qp, name)
+
+    @staticmethod
+    def get_required_list_request_parameter(request, name) -> list:
+        qp = DrfUtils.get_request_parameters(request)
+        return DictUtils.get_required_list_dict_property(qp, name)
+
+    @staticmethod
+    def get_list_request_parameter(request, name, default_value=None) -> list:
+        qp = DrfUtils.get_request_parameters(request)
+        return DictUtils.get_list_dict_property(qp, name, default_value)
 
     @staticmethod
     def get_current_user(request):
