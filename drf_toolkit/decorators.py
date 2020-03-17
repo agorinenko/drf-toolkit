@@ -3,12 +3,14 @@ from functools import wraps
 from power_dict.schema_validator import SchemaValidator
 from drf_toolkit.drf_utils import DrfUtils
 
+
 def validate_request(schema):
     def decorator(view_func):
         @wraps(view_func)
         def _wrapped_view(view, *args, **kwargs):
             request = view.request
             context = DrfUtils.get_request_parameters(request)
+            context = DrfUtils.transform_list_parameters(context, schema)
 
             context = SchemaValidator.validate(context, schema)
             kwargs['context'] = context

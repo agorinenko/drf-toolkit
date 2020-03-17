@@ -1,12 +1,11 @@
 import logging
 
-from django.contrib.auth.models import AnonymousUser
-from django.http import Http404
+# from django.contrib.auth.models import AnonymousUser
+# from django.http import Http404
 from power_dict.errors import NoneParameterError, InvalidParameterError, InvalidSchemeError, NotAllowedParameterError
 from power_dict.utils import DictUtils
 from rest_framework.exceptions import ParseError, NotAuthenticated
 from rest_framework.response import Response
-
 from drf_toolkit.errors import ApiViewError, DjangoModelError
 
 
@@ -127,6 +126,7 @@ class DrfUtils:
     @staticmethod
     def get_current_user(request):
         user = request.user
+        from django.contrib.auth.models import AnonymousUser
         if type(user) is AnonymousUser:
             return None
 
@@ -140,3 +140,14 @@ class DrfUtils:
             return 'anonymous'
 
         return user.username
+
+    @staticmethod
+    def transform_list_parameters(context: dict, schema: list):
+        list_rows = list(filter(lambda x: DictUtils.get_required_str_dict_property(x, 'type') == 'list', schema))
+        if len(list_rows) > 0:
+            for row in list_rows:
+                context_key = DictUtils.get_required_str_dict_property(row, 'name')
+                context_value = DictUtils.get_dict_property(context, context_key)
+                if isinstance(context_value, str):
+                    context[context_key] = context_value.split(',')
+        return context
