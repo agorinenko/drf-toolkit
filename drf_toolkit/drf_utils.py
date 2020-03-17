@@ -1,7 +1,6 @@
 import logging
 
-# from django.contrib.auth.models import AnonymousUser
-# from django.http import Http404
+from django.http import Http404
 from power_dict.errors import NoneParameterError, InvalidParameterError, InvalidSchemeError, NotAllowedParameterError
 from power_dict.utils import DictUtils
 from rest_framework.exceptions import ParseError, NotAuthenticated
