@@ -30,3 +30,16 @@ class CommonTests(unittest.TestCase):
         context = {'limit': 1, 'offset': 0}
         context_2 = DrfUtils.transform_list_parameters(context, schema)
         self.assertEqual(context, context_2)
+
+
+    def test_transform_list_parameters_3(self):
+        schema = [
+            {'name': 'type_of_message', 'type': 'list',
+             'items': {'type': 'enum', 'choices': ['text_message', 'issue', 'solution', 'solution_without_request']},
+             'required': False, 'unique': True, 'description': 'Тип сообщения'}]
+
+        context = {'type_of_message': ''}
+
+        context = DrfUtils.transform_list_parameters(context, schema)
+        self.assertIsInstance(context['type_of_message'], list)
+        self.assertEqual(context['type_of_message'], [])

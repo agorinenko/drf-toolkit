@@ -149,5 +149,8 @@ class DrfUtils:
                 context_key = DictUtils.get_required_str_dict_property(row, 'name')
                 context_value = DictUtils.get_dict_property(context, context_key)
                 if isinstance(context_value, str):
-                    context[context_key] = context_value.split(',')
+                    if DictUtils.str_is_null_or_empty(context_value):
+                        context[context_key] = []
+                    else:
+                        context[context_key] = context_value.split(',')
         return context
