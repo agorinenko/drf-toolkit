@@ -152,5 +152,7 @@ class DrfUtils:
                     if DictUtils.str_is_null_or_empty(context_value):
                         context[context_key] = []
                     else:
-                        context[context_key] = context_value.split(',')
+                        str_list = context_value.split(',')
+                        str_list = list(filter(None, str_list))
+                        context[context_key] = str_list
         return context
