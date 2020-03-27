@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="drf_toolkit",
-    version="0.0.15",
+    version="0.0.16",
     author="Gorinenko Anton",
     author_email="anton.gorinenko@gmail.com",
     description="Django rest framework toolkit",
@@ -25,7 +25,7 @@ setuptools.setup(
     ],
     install_requires=[
         'try-parse',
-        'power-dict',
+        'power-dict>=0.0.11',
         'djangorestframework',
         "django>=2.2"
     ],
