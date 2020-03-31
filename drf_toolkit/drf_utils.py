@@ -3,7 +3,6 @@ import logging
 from django.http import Http404
 from power_dict.errors import NoneParameterError, InvalidParameterError, InvalidSchemeError, NotAllowedParameterError
 from power_dict.utils import DictUtils
-from rest_framework.exceptions import ParseError, NotAuthenticated
 from rest_framework.response import Response
 from drf_toolkit.errors import ApiViewError, DjangoModelError
 
@@ -23,7 +22,6 @@ class DrfUtils:
             if exception_type in [
                 InvalidParameterError,
                 NoneParameterError,
-                ParseError,
                 InvalidSchemeError,
                 DjangoModelError,
                 NotAllowedParameterError
@@ -33,10 +31,6 @@ class DrfUtils:
                 ApiViewError
             ]:
                 status = exception.status
-            elif exception_type in [
-                NotAuthenticated
-            ]:
-                status = 401
             elif exception_type in [
                 Http404
             ]:

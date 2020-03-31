@@ -1,6 +1,8 @@
 from functools import wraps
 
 from power_dict.schema_validator import SchemaValidator
+from rest_framework.exceptions import APIException
+
 from drf_toolkit.drf_utils import DrfUtils
 
 
@@ -27,6 +29,8 @@ def except_error():
         def _wrapped_view(view, *args, **kwargs):
             try:
                 return view_func(view, *args, **kwargs)
+            except APIException as ex:
+                raise ex
             except Exception as ex:
                 return DrfUtils.generate_bad_response(exception=ex)
 
