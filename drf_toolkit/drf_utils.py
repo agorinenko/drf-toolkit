@@ -1,6 +1,5 @@
 import logging
 
-from django.contrib.auth import get_user
 from django.http import Http404
 from power_dict.errors import NoneParameterError, InvalidParameterError, InvalidSchemeError, NotAllowedParameterError
 from power_dict.utils import DictUtils
@@ -119,7 +118,7 @@ class DrfUtils:
 
     @staticmethod
     def get_current_user(request):
-        user = get_user(request)
+        user = request.user
         from django.contrib.auth.models import AnonymousUser
         if type(user) is AnonymousUser:
             return None
