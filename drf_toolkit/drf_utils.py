@@ -52,17 +52,22 @@ class DrfUtils:
 
     @staticmethod
     def get_request_parameters(request) -> dict:
-        result = {}
-        if request.query_params is not None and len(request.query_params) > 0:
-            qp = request.query_params.dict()
-            result = {**result, **qp}
+        def merge(result_params, request_params):
+            if request_params is not None and len(request_params) > 0:
+                if type(request_params) != dict:
+                    request_params = request_params.dict()
 
-        if request.data is not None and len(request.data) > 0:
-            if type(request.data) == dict:
-                qp = request.data
-            else:
-                qp = dict(request.data)
-            result = {**result, **qp}
+                result_params = {**result_params, **request_params}
+
+            return result_params
+
+        result = merge({}, request.query_params)
+        result = merge(result, request.data)
+
+        files = request.FILES
+        if files is not None and len(files) > 0:
+            files = dict(files)
+            result = merge(result, files)
 
         return result
 
