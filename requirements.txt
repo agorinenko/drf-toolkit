@@ -2,6 +2,6 @@ try-parse
 power-dict
 djangorestframework
 pytest==5.3.1
-django==2.2.10
+django==2.2.20
 wheel
 twine
